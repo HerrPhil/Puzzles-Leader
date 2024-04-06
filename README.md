@@ -18,7 +18,16 @@ and may also have limited processing time per item.
 
 See [Boyer-More majorith vote algorithm](https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_majority_vote_algorithm) wikipedia page here.
 
+See [geeks-for-geeks Boyer-Moore vote algorithm](https://www.geeksforgeeks.org/boyer-moore-majority-voting-algorithm/) page, too.
+
+See [geeks-for-geeks Majority Element](https://www.geeksforgeeks.org/majority-element/) page, too.
+
 See [streaming algorithm](https://en.wikipedia.org/wiki/Streaming_algorithm) wikipedia page here.
+
+Note: The Leader problem is, in actual fact, a simplified name of a special case of the streaming algorithm.
+
+In the data stream model, the frequent elements problem is to output a set of elements that constitute more than some fixed fraction of the stream.
+A special case is the majority problem, which is to determine whether or not any value constitutes a majority of the stream.
 
 See [codility leader note](https://codility.com/media/train/6-Leader.pdf) PDF page here.
 
@@ -35,3 +44,34 @@ a0 a1 a2 a3 a4 a5 a6
 0  1  2  3  4  5  6
 ```
 
+In the picture the leader is the "6" value.
+Notice that the leader can have at most one leader.
+If there were two leaders then there total occurrences would be more than 2*(n/2) = n,
+but we only have *n* elements.
+
+The leader may be found in many ways. We describe some methods here,
+starting with trivial, slow ideas and ending with very creative, fast algorithms.
+The task is to find the value of the leader of the sequence
+a<sub>0</sub>, <sub>a1</sub>, ..., a<sub>n-1</sub>,
+such that 0 <= a<sub>i</sub> <= 10<sup>9</sup>.
+
+If there is no leader, the result should be -1.
+
+#### Solution with O(n<sup>2</sup>) time complexity
+
+We count the occurrences of every element:
+
+```
+def slowLeader(A):
+    n = len(a)
+    leader = -1
+    for k in xrange(n):
+        candidate = A[k]
+        count = 0
+        for i in xrange(n):
+            if (A[i] == candidate):
+                count += 1
+        if ( count > n / 2):
+            leader = candidate
+    return leader
+```
