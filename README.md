@@ -52,7 +52,7 @@ but we only have *n* elements.
 The leader may be found in many ways. We describe some methods here,
 starting with trivial, slow ideas and ending with very creative, fast algorithms.
 The task is to find the value of the leader of the sequence
-a<sub>0</sub>, <sub>a1</sub>, ..., a<sub>n-1</sub>,
+a<sub>0</sub>, a<sub>1</sub>, ..., a<sub>n-1</sub>,
 such that 0 <= a<sub>i</sub> <= 10<sup>9</sup>.
 
 If there is no leader, the result should be -1.
