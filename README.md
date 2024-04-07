@@ -75,3 +75,41 @@ def slowLeader(A):
             leader = candidate
     return leader
 ```
+
+#### Solution witn O(*n* log *n*) time complexity
+
+If the sequence is presented in non-decreasing order,
+then identical values are adjacent to each other.
+
+```
+a0 a1 a2 a3 a4 a5 a6
+4  6  6  6  6  8  8
+0  1  2  3  4  5  6
+```
+
+Having sorted the sequence, we can easily count slices of the same values
+and find the leader in a smarter way.
+Notice that if the leader occurs somewhere in our sequence,
+then it must occur at index n / 2 (the central element).
+This is because, given that the leader occurs in more than half
+the total values in the sequence, there are more leader values
+than will fit on either side of the central element in the sequence.
+
+```
+def fastLeader(A):
+    n = len(a)
+    leader = -1
+    A.sort()
+    candidate = A[n / 2]
+    count = 0
+    for i in xrange(n):
+        if (A[i] == candidate):
+            count += 1
+    if (count > n / 2):
+        leader = candidate
+    return leader
+```
+
+The time complexity of the above algorithm is O( *n* log *n* ) due to the sorting time.
+
+
