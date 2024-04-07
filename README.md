@@ -76,7 +76,7 @@ def slowLeader(A):
     return leader
 ```
 
-#### Solution witn O(*n* log *n*) time complexity
+#### Solution with O(*n* log *n*) time complexity
 
 If the sequence is presented in non-decreasing order,
 then identical values are adjacent to each other.
@@ -112,4 +112,91 @@ def fastLeader(A):
 
 The time complexity of the above algorithm is O( *n* log *n* ) due to the sorting time.
 
+#### Solution with O(n) time complexity
 
+Notice that if the sequence a<sub>0</sub>, a<sub>1</sub>, ..., a<sub>n-1</sub> contains a leader,
+then after removing a pair of elements of different values, the remaining sequence still has the same leader.
+Indeed, if we remove two different elements then only one of them could be the leader.
+The leader in the new sequence occurs more than n / 2 - 1 = (n - 2)/2 times.
+Consequently, it is still the new leader of the new sequence of n - 2 elements.
+
+```
+a0 a1
+4  6
+0  1
+      a2 a3 a4 a5 a6
+      6  6  6  8  8
+      2  3  4  5  6
+```
+
+Removing pairs of different elements is not trivial.
+Let's create an empty stack onto which we will be pushing consecutive elements.
+After each such operation we check whether the two elements at the top of the stack are different.
+If they are, we remove them from the stack.
+This is equivalent to removing a pair of different elements from the sequence.
+
+                      8x
+                   6  6x 8x
+          6x    6  6  6  6x
+       4  4x 6  6  6  6  6
+
+       a0 a1 a2 a3 a4 a5 a6
+       4  6  6  6  6  8  8
+
+In fact, we do not need to remember all the elements from the stack,
+because all the values below the top are always equal.
+It is sufficient to remember only the values of elements and the size of the stack.
+
+```
+def goldenLeader(A):
+    n = len(A)
+    size = 0
+    for k in xrange(n):
+        if (size == 0):
+            size += 1
+            value = A[k]
+        else
+            if (value != A[k]):
+                size -= 1
+            else:
+                size += 1
+    candidate = -1
+    if (size > 1):
+        candidate = value
+    leader = -1
+    count = 0
+    for k in xrange(n):
+        if (A[k] == candidate):
+            count += 1
+    if (count > n / 2):
+        leader = candidate
+    return leader
+```
+
+At the beginning we notice that if the sequence contains a leader,
+then after the removal of different elements the leader will not have changed.
+After removing all pairs of different values, we end up with a sequence containing all the same values.
+This value is not necessarily the leader; it is only a candidate for the leader.
+Finally, we should iterate through all the elements and count occurrences of the candidate;
+if it is greater than n / 2 then we have found the leader;
+otherwise the sequence does not contain a leader.
+
+The time complexity of this algorithm is O(*n*) because every element is considered only once.
+The final counting of occurrences of the candidate value also works n O(*n*) time.
+
+My notes:
+
+The golden leader is a fabricated name by the Codility authors.
+The underlying work is that of Robert Stephen Boyer and J Strother Moore.
+Both are accomplished PhD professors and researchers.
+
+For any company to suggest that anyone who cannot create a solution equal to or better than
+the work of two Phd professors in the alloted 100 minutes codility provides for questions
+is acting irresponsibly.
+
+At the very least, such companies are presenting as smarter than they actually are,
+and are exploiting their bought access to high-level research to eliminate candidate with false credibility.
+
+As well, the definition of the stack in this solution is nothing like a "Stack" in java.
+
+It is tracked by a previous value, the current indexed value and the size (frequency) of the current value.
