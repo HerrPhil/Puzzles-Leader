@@ -213,4 +213,10 @@ This is effectively the golden leader solution. One change to make is in the ret
 
 Instead of the solution returning the leader value itself, return the index of, say, the first occurrence of the leader value.
 
+#### EquiLeader
 
+Find the index S such that the leaders of the sequences A[0], A[1], ..., A[S] and A[S+1], A[S+2], ..., A[N-1] are the same.
+
+This is effectively the golden leader solution, applied to a series of sub-arrays of A, bisected by index S.
+
+Check sub-arrays for common index S where S = {0, 1, 2, ..., N - 1}
