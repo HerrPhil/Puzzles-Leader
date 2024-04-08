@@ -200,3 +200,17 @@ and are exploiting their bought access to high-level research to eliminate candi
 As well, the definition of the stack in this solution is nothing like a "Stack" in java.
 
 It is tracked by a previous value, the current indexed value and the size (frequency) of the current value.
+
+### Codility Leader Problems
+
+There are two practice problems [here](https://app.codility.com/programmers/lessons/8-leader/).
+
+#### Dominator
+
+Find an index of an array such that its value occurs at more than half of indices in the array.
+
+This is effectively the golden leader solution. One change to make is in the return value.
+
+Instead of the solution returning the leader value itself, return the index of, say, the first occurrence of the leader value.
+
+
