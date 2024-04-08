@@ -19,7 +19,6 @@ public class GoldenLeader {
         int n = A.length;
         int size = 0;
         int value = -1;
-        //Arrays.sort(A);
 
         // performance
         int checks = 0;
@@ -79,6 +78,7 @@ public class GoldenLeader {
 
         }
 
+        checks++;
         if (count > n / 2) {
 
             leader = candidate;
