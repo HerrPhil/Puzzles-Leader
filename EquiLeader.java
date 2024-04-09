@@ -97,6 +97,7 @@ public class EquiLeader {
             checks++;
             if (A[i] == leader) {
 
+                // count of leader in first sub-array
                 leaderCount++;
 
             }
@@ -109,8 +110,14 @@ public class EquiLeader {
             // since count minus leader count is the remainder of the count of leaders.
             // both counts must be greater than n / 2 to be a leader.
 
+            // threshold to be leader in first sub-array is half of sub-array size
+            int leaderThreshold = (i + 1) / 2;
+            // remaining leader values in second sub-array
+            int otherLeaderCount = count - leaderCount;
+            // threshold to be leader in second sub-array is half of sub-array size
+            int otherLeaderThreshold = (n - i - 1) / 2;
             checks += 2;
-            if (leaderCount > (i + 1) / 2 && (count - leaderCount) > (n - i - 1) / 2) {
+            if (leaderCount > leaderThreshold && otherLeaderCount > otherLeaderThreshold) {
 
                 equiCount++; // both sub-arrays have same leader
 
